@@ -39,6 +39,13 @@
 			<groupId>com.netflix.graphql.dgs</groupId>
 			<artifactId>graphql-dgs-spring-graphql-starter</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
+		<dependency>
+			<groupId>net.datafaker</groupId>
+			<artifactId>datafaker</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -87,6 +94,46 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.github.deweyjose</groupId>
+				<artifactId>graphqlcodegen-maven-plugin</artifactId>
+				<version>1.61.5</version>
+				<executions>
+					<execution>
+						<id>dgs-codegen</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaPaths>
+								<param>src/main/resources/schema</param>
+							</schemaPaths>
+							<outputDir>src/main/java</outputDir>
+							<packageName>com.codewithsakthi.graphqldgs.codegen</packageName>
+							<addGeneratedAnnotation>true</addGeneratedAnnotation>
+							<disableDatesInGeneratedAnnotation>true</disableDatesInGeneratedAnnotation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-dgs-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
