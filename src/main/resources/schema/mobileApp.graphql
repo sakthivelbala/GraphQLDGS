@@ -1,0 +1,33 @@
+interface Mobile {
+    name: String!
+    appId: ID!
+}
+
+type MobileApp implements Mobile{
+    name: String!
+    appId: ID!
+    version: String
+    platform: [osType]
+    author: Author
+    releaseDate: Date
+}
+
+type Author {
+    name: String
+    age: Int
+}
+
+input MobileAppFilter{
+    name: String
+    version: String
+    platform: osType
+    author: AuthorFilter
+}
+
+input AuthorFilter{
+    name: String
+}
+
+enum osType {
+    ANDROID, IOS
+}

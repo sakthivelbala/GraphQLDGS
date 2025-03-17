@@ -1,10 +1,16 @@
+scalar Date
+
 type Hello{
     text: String!
     randomNumber: Int
 }
 
+union HelloUnionMobilapp = Hello | MobileApp
+
 type Query{
     allHellos: [Hello]
     onHello: Hello
     getHelloByRandomNumber(number: Int): Hello
+    mobileApps(mobileAppFilter: MobileAppFilter) : [MobileApp]
+    testUnion: HelloUnionMobilapp
 }

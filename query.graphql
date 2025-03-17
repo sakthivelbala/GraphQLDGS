@@ -1,0 +1,27 @@
+query findById($id: Int, $mobileAppFilter: MobileAppFilter) {
+  getHelloByRandomNumber(number: $id) {
+    text
+    randomNumber
+  }
+  mobileApps(mobileAppFilter : $mobileAppFilter){
+    __typename
+    appId
+    name
+    platform
+    author {
+      name
+    }
+    ... on MobileApp {
+      version
+    }
+    releaseDate
+  }
+  testUnion{
+    ... on Hello{
+      text
+    }
+    ... on MobileApp{
+      version
+    }
+  }
+}
